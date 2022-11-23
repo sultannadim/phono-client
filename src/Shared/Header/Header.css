@@ -1,0 +1,11 @@
+.my-nav a{
+    color: #1a1a1a;
+    transition: .3s;
+}
+.header{
+    background-color: #f1f1f1;
+}
+
+.my-nav a:hover{
+    color: #eb0028;
+}
