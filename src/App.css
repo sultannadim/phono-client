@@ -21,3 +21,10 @@
   
 }
 /* banner part end */
+
+/* categories part start */
+.cat-img{
+  height: 270px;
+  object-fit: cover;
+}
+/* categories part end */
