@@ -36,7 +36,10 @@ const Header = () => {
 
               {user?.uid ? (
                 <>
-                  <Link className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3">
+                  <Link
+                    to="/dashboard"
+                    className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3"
+                  >
                     Dashboard
                   </Link>
                   <Link
@@ -55,7 +58,10 @@ const Header = () => {
                 </Link>
               )}
               {user?.photoURL && (
-                <Link className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3">
+                <Link
+                  to="/dashboard"
+                  className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3"
+                >
                   <img
                     src={user?.photoURL}
                     className="profile-img"

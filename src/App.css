@@ -28,3 +28,26 @@
   object-fit: cover;
 }
 /* categories part end */
+
+/* side nav bar part start */
+.user-sm-box img,.profile-box img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-sm-box{
+  background-color: #f1f1f1;
+  min-height: 100vh;
+  
+}
+.divider {
+  height: 2px;
+  background-color: #130f40;
+  border-radius: 5px;
+}
+.profile-box img{
+  width: 150px;
+  height: 150px;
+}
+/* side nav bar part end */

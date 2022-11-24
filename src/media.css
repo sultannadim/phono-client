@@ -9,6 +9,13 @@
         height: 400px;
     }
     /* banner part end */
+    /* dasgboard part start */
+    .user-sm-box{
+        
+        min-height: inherit;
+        
+      }
+    /* dasgboard part end */
  }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -23,6 +30,13 @@
         height: 450px;
     }
     /* banner part end */
+    /* dasgboard part start */
+    .user-sm-box{
+        
+        min-height: inherit;
+        
+      }
+    /* dasgboard part end */
  }
 
 /*Medium devices (tablets, 768px and up)*/
