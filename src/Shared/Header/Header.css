@@ -1,6 +1,7 @@
 .my-nav a{
     color: #1a1a1a;
     transition: .3s;
+    text-transform: capitalize;
 }
 .header,.footer{
     background-color: #f1f1f1;
@@ -8,4 +9,10 @@
 
 .my-nav a:hover{
     color: #eb0028;
+}
+.profile-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }

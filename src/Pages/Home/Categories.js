@@ -18,7 +18,7 @@ const Categories = () => {
           <div className="col-lg-12">
             <h1 className="mb-sm-4 mb-3">All Categories For Resell</h1>
           </div>
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <div className="col-lg-4 col-md-6" key={category._id}>
               <Card className="mb-lg-0 mb-sm-4 mb-3">
                 <Card.Img
