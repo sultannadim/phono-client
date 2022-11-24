@@ -1,5 +1,5 @@
-.my-nav a{
-    color: #1a1a1a;
+.my-nav a,.db a{
+    color: #1a1a1a !important;
     transition: .3s;
     text-transform: capitalize;
 }
@@ -7,7 +7,7 @@
     background-color: #f1f1f1;
 }
 
-.my-nav a:hover{
+.my-nav a,.db a:hover{
     color: #eb0028;
 }
 .profile-img{
