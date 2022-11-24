@@ -57,7 +57,10 @@ const SideNav = () => {
               >
                 Add A product
               </Link>
-              <Link className=" fw-bold d-block text-decoration-none mb-2">
+              <Link
+                to="/dashboard/myproducts"
+                className=" fw-bold d-block text-decoration-none mb-2"
+              >
                 My Products
               </Link>
             </>
@@ -70,6 +73,9 @@ const SideNav = () => {
               </Link>
               <Link className=" fw-bold d-block text-decoration-none mb-2">
                 All Buyers
+              </Link>
+              <Link className=" fw-bold d-block text-decoration-none mb-2">
+                Reported Items
               </Link>
             </>
           )}

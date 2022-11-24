@@ -67,7 +67,9 @@ const AddProduct = () => {
 
   return (
     <div>
-      <h1 className="text-capitalize mb-sm-5 mb-3">Add Your Product</h1>
+      <h1 className="text-capitalize text-center mb-sm-5 mb-3">
+        Add Your Product
+      </h1>
       <div className="row  justify-content-center">
         <div className="col-lg-8 ">
           <div className="reg-box">

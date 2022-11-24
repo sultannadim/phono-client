@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -19,19 +20,21 @@ const Categories = () => {
             <h1 className="mb-sm-4 mb-3">All Categories For Resell</h1>
           </div>
           {categories?.map((category) => (
-            <div className="col-lg-4 col-md-6" key={category._id}>
+            <div className="col-lg-4 col-md-6" key={category?._id}>
               <Card className="mb-lg-0 mb-sm-4 mb-3">
                 <Card.Img
                   className="cat-img"
                   variant="top"
-                  src={category.img}
+                  src={category?.img}
                 />
                 <Card.Body>
-                  <Card.Title>{category.categoryName}</Card.Title>
-                  <Card.Text>{category.title}</Card.Text>
-                  <Button variant="primary" className="bg-dark border-dark">
-                    View All
-                  </Button>
+                  <Card.Title>{category?.categoryName}</Card.Title>
+                  <Card.Text>{category?.title}</Card.Text>
+                  <Link to={`/category/${category?.categoryId}`}>
+                    <Button variant="primary" className="bg-dark border-dark">
+                      View All
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </div>

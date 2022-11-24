@@ -51,3 +51,12 @@
   height: 150px;
 }
 /* side nav bar part end */
+
+/* category card part start */
+.category-card img{
+
+  height: 350px;
+  object-fit: cover;
+
+}
+/* category card part end */
