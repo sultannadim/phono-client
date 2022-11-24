@@ -27,7 +27,7 @@ const Header = () => {
                 to="/login"
                 className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3"
               >
-                Login
+                Log in
               </Link>
             </Nav>
           </Navbar.Collapse>

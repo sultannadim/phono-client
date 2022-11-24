@@ -12,7 +12,7 @@ const Login = () => {
           <div className="col-lg-5 col-md-8 col-sm-11">
             <div className="login-box">
               <Form className="p-sm-5 p-4 py-5   shadow-lg rounded-3">
-                <h3 className="text-center mb-4">Login</h3>
+                <h3 className="text-center mb-4">Log in</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control

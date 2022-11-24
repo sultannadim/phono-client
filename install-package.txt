@@ -1,3 +1,5 @@
 1. npm i react-router-dom
 2. npm install react-bootstrap bootstrap
 3. npm install react-icons --save
+4. npm install firebase
+5. npm install react-hot-toast
