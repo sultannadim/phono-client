@@ -6,8 +6,8 @@ const DashboardLayout = () => {
   return (
     <section>
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-3 col-md-4 g-lg-0 ">
+        <div className="row justify-content-center">
+          <div className="col-lg-3 col-md-4 col-sm-9 g-lg-0 ">
             <SideNav></SideNav>
           </div>
           <div className="col-lg-9 col-md-8 ">

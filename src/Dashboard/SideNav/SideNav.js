@@ -25,7 +25,7 @@ const SideNav = () => {
       .catch(() => {});
   };
   return (
-    <div className="side-nav-box  sticky-lg-top  ">
+    <div className="side-nav-box  sticky-md-top  ">
       <div className="user-sm-box  text-center py-md-5 py-4 px-3 d-flex flex-column">
         <img
           src={user?.photoURL}
@@ -52,7 +52,10 @@ const SideNav = () => {
 
           {roleUser?.role === "Seller" && (
             <>
-              <Link className=" fw-bold d-block text-decoration-none mb-2">
+              <Link
+                to="/dashboard/addproduct"
+                className=" fw-bold d-block text-decoration-none mb-2"
+              >
                 Add A product
               </Link>
               <Link className=" fw-bold d-block text-decoration-none mb-2">
