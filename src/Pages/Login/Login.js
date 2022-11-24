@@ -1,4 +1,3 @@
-import { Toast } from "bootstrap";
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, googleLogin } = useContext(AuthContext);
   const [error, setError] = useState("");
   const handelLogin = (event) => {
     event.preventDefault();
@@ -22,6 +21,21 @@ const Login = () => {
         setError("");
         toast.success("Log in Successfull");
         form.reset();
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
+  };
+  // google login
+  const handelGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+
+        setError("");
+        toast.success("Google Login successfull");
         console.log(user);
       })
       .catch((error) => {
@@ -71,6 +85,7 @@ const Login = () => {
                   Login
                 </Button>
                 <Button
+                  onClick={handelGoogleLogin}
                   variant="primary"
                   className="bg-dark border-dark w-100 py-2 mb-3"
                 >
