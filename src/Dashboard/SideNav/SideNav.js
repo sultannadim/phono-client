@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,17 @@ import { toast } from "react-hot-toast";
 
 const SideNav = () => {
   const { user, logOut } = useContext(AuthContext);
+
   const [roleUser, setRoleUser] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/roleuser/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRoleUser(data);
+        console.log(data);
+      });
+  }, [user?.email]);
   const handelLogOut = () => {
     logOut()
       .then(() => {
@@ -31,24 +41,36 @@ const SideNav = () => {
           >
             My Profile
           </Link>
-          <Link
-            to="/dashboard/myorders"
-            className=" fw-bold d-block text-decoration-none mb-2"
-          >
-            My orders
-          </Link>
-          <Link className=" fw-bold d-block text-decoration-none mb-2">
-            Add A product
-          </Link>
-          <Link className=" fw-bold d-block text-decoration-none mb-2">
-            My Products
-          </Link>
-          <Link className=" fw-bold d-block text-decoration-none mb-2">
-            All Sellers
-          </Link>
-          <Link className=" fw-bold d-block text-decoration-none mb-2">
-            All Buyers
-          </Link>
+          {(roleUser?.role === "User" || user?.emailVerified === true) && (
+            <Link
+              to="/dashboard/myorders"
+              className=" fw-bold d-block text-decoration-none mb-2"
+            >
+              My orders
+            </Link>
+          )}
+
+          {roleUser?.role === "Seller" && (
+            <>
+              <Link className=" fw-bold d-block text-decoration-none mb-2">
+                Add A product
+              </Link>
+              <Link className=" fw-bold d-block text-decoration-none mb-2">
+                My Products
+              </Link>
+            </>
+          )}
+
+          {roleUser?.role === "Admin" && (
+            <>
+              <Link className=" fw-bold d-block text-decoration-none mb-2">
+                All Sellers
+              </Link>
+              <Link className=" fw-bold d-block text-decoration-none mb-2">
+                All Buyers
+              </Link>
+            </>
+          )}
         </div>
         <div className="bottom-box mt-auto">
           <Link to="/" className="m-auto d-block w-75 text-decoration-none">
