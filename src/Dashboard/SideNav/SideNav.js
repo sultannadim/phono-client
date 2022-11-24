@@ -14,7 +14,6 @@ const SideNav = () => {
       .then((res) => res.json())
       .then((data) => {
         setRoleUser(data);
-        console.log(data);
       });
   }, [user?.email]);
   const handelLogOut = () => {

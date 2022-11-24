@@ -1,11 +1,68 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthProvider";
 
 const AddProduct = () => {
+  const { user } = useContext(AuthContext);
   const handelAddProduct = (event) => {
-    event.reventDefault();
+    event.preventDefault();
     const form = event.target;
+    const sellerName = user?.displayName;
+    const productName = form.name.value;
+    const orginalPrice = form.orginalPrice.value;
+    const resellPrice = form.resellPrice.value;
+    const location = form.location.value;
+    const phone = form.phone.value;
+    const yearPurchase = form.yearPurchase.value;
+    const photoURL = form.photoURL.value;
+    const condation = form.condation.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const date = new Date().toLocaleString();
+    let productId;
+    if (category === "Samsung") {
+      productId = 1;
+    }
+
+    if (category === "Apple") {
+      productId = 2;
+    }
+    if (category === "Oppo") {
+      productId = 3;
+    }
+
+    const products = {
+      sellerName,
+      productName,
+      orginalPrice,
+      resellPrice,
+      location,
+      phone,
+      yearPurchase,
+      photoURL,
+      condation,
+      category,
+      details,
+      productId,
+      date,
+    };
+
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(products),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Product added successfully");
+          form.reset();
+        }
+      });
   };
 
   return (
@@ -74,7 +131,7 @@ const AddProduct = () => {
                 <Form.Label>Year Of Purchase</Form.Label>
                 <Form.Control
                   type="text"
-                  name="yearUse"
+                  name="yearPurchase"
                   placeholder="Year Of Use"
                   required
                 />
@@ -112,7 +169,7 @@ const AddProduct = () => {
                 >
                   <option value="Samsung">Samsung</option>
                   <option value="Oppo">Oppo</option>
-                  <option value="Fair">Fair</option>
+                  <option value="Apple">Apple</option>
                 </Form.Select>
               </Form.Group>
 
