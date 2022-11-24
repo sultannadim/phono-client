@@ -16,13 +16,31 @@ const Registration = () => {
     const photoURL = form.photoURL.value;
     const role = form.role.value;
     const password = form.password.value;
-    const status = "not varified";
+    const status = "unvarified";
+
+    const users = {
+      name,
+      email,
+      photoURL,
+      role,
+      status,
+    };
 
     createUser(email, password)
       .then((result) => {
         const profiel = { displayName: name, photoURL: photoURL };
         updateUser(profiel)
           .then(() => {
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(users),
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data));
+
             setError("");
             form.reset();
             toast.success("Registration Successfull");
