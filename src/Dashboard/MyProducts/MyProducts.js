@@ -33,6 +33,18 @@ const MyProducts = () => {
         });
     }
   };
+  const handelAdvertise = (id) => {
+    fetch(`http://localhost:5000/product/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Advertise Added");
+          refetch();
+        }
+      });
+  };
   return (
     <div>
       <h1 className="text-capitalize mb-sm-5 mb-3">
@@ -62,7 +74,10 @@ const MyProducts = () => {
                 <td>{product?.status}</td>
                 <td>
                   {product?.advertise === "Advertise" ? (
-                    <button className="btn btn-sm btn-primary advertise mb-lg-0 mb-2">
+                    <button
+                      onClick={() => handelAdvertise(product?._id)}
+                      className="btn btn-sm btn-primary advertise mb-lg-0 mb-2"
+                    >
                       {product?.advertise}
                     </button>
                   ) : (
