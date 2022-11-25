@@ -1,17 +1,52 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Table from "react-bootstrap/Table";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthProvider";
+import verified from "../../images/verified.png";
 
 const AllSellers = () => {
   const { user } = useContext(AuthContext);
-  const [sellers, setSellers] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/allsellers")
+
+  const { data: sellers = [], refetch } = useQuery({
+    queryKey: ["allsellers"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/allsellers");
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  const handelVerified = (seller) => {
+    fetch(`http://localhost:5000/allsellers/${seller?._id}`, {
+      method: "PUT",
+    })
       .then((res) => res.json())
-      .then((data) => setSellers(data));
-  }, []);
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success("Seller Verified Successfully");
+          refetch();
+        }
+      });
+  };
+  const handelDelete = (seller) => {
+    const agree = window.confirm(
+      `Are you sure? you want to delet ${seller?.name}`
+    );
+    if (agree) {
+      fetch(`http://localhost:5000/allsellers/${seller?._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Your Seller deleted");
+            refetch();
+          }
+        });
+    }
+  };
   return (
     <div>
       <h1 className="text-capitalize mb-sm-5 mb-3">
@@ -35,9 +70,18 @@ const AllSellers = () => {
               <tr key={seller?._id}>
                 <td>{index + 1}</td>
                 <td>
-                  <img src={seller?.photoURL} alt="" />
+                  <img src={seller?.photoURL} alt="profile" />
                 </td>
-                <td>{seller?.name}</td>
+                <td>
+                  {seller?.name}
+                  {seller?.status === "Verified" && (
+                    <img
+                      className="verified ms-2"
+                      src={verified}
+                      alt="profile"
+                    />
+                  )}
+                </td>
                 <td>{seller?.email}</td>
                 <td>{seller?.role}</td>
                 <td>
@@ -47,12 +91,18 @@ const AllSellers = () => {
                 </td>
 
                 <td>
-                  {seller?.status !== "verified" && (
-                    <button className="btn btn-sm btn-danger ms-lg-2">
+                  {seller?.status !== "Verified" && (
+                    <button
+                      onClick={() => handelVerified(seller)}
+                      className="btn btn-sm btn-danger ms-lg-2"
+                    >
                       Verify User
                     </button>
                   )}
-                  <button className="btn btn-sm btn-danger ms-lg-2">
+                  <button
+                    onClick={() => handelDelete(seller)}
+                    className="btn btn-sm btn-danger ms-lg-2"
+                  >
                     Delete
                   </button>
                 </td>

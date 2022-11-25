@@ -74,7 +74,10 @@ const SideNav = () => {
               >
                 All Sellers
               </Link>
-              <Link className=" fw-bold d-block text-decoration-none mb-2">
+              <Link
+                to="/dashboard/allbuyers"
+                className=" fw-bold d-block text-decoration-none mb-2"
+              >
                 All Buyers
               </Link>
               <Link className=" fw-bold d-block text-decoration-none mb-2">

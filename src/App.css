@@ -73,3 +73,10 @@
   overflow-x: scroll;
 }
 /* my product part end */
+
+/* all seller part start */
+.verified{
+  width: 16px !important;
+  height: 16px !important;
+}
+/* all seller part end */

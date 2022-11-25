@@ -16,7 +16,7 @@ const Registration = () => {
     const photoURL = form.photoURL.value;
     const role = form.role.value;
     const password = form.password.value;
-    const status = "unvarified";
+    const status = "Unverified";
 
     const users = {
       name,
