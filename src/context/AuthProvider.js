@@ -19,6 +19,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true);
 
+  const [myAdmin, setMyAdmin] = useState({});
+
   const createUser = (email, password) => {
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -50,6 +52,15 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/roleuser?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMyAdmin(data);
+        console.log(data);
+      });
+  }, [user?.email]);
+
   const authInfo = {
     createUser,
     updateUser,
@@ -57,6 +68,8 @@ const AuthProvider = ({ children }) => {
     user,
     logOut,
     googleLogin,
+    loader,
+    myAdmin,
   };
 
   return (

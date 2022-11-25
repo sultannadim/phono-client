@@ -10,7 +10,7 @@ const SideNav = () => {
   const [roleUser, setRoleUser] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/roleuser/${user?.email}`)
+    fetch(`http://localhost:5000/roleuser?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setRoleUser(data);
