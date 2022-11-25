@@ -30,9 +30,7 @@ const UserProfile = () => {
           <div className="ms-sm-4 ms-2 profile-details">
             <h4 className="text-capitalize mb-2">Name : {user?.displayName}</h4>
             <h5 className=" mb-2">Email : {user?.email}</h5>
-            <h5 className="m-0">
-              Role : {roleUser?.role ? roleUser?.role : "User"}
-            </h5>
+            <h5 className="m-0">Role : {roleUser?.role && roleUser?.role}</h5>
           </div>
         </div>
       </div>

@@ -89,7 +89,7 @@
 .error-box img{
   max-width: 350px;
 }
-.spinner-box{
+.spinner-box,.private-box{
   min-height: 90vh;
   display: flex;
   align-items: center;

@@ -3,9 +3,10 @@ import { AuthContext } from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-hot-toast";
+import Loader from "../../Shared/Spinner/Loader";
 
 const SideNav = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loader } = useContext(AuthContext);
 
   const [roleUser, setRoleUser] = useState({});
 
@@ -23,6 +24,9 @@ const SideNav = () => {
       })
       .catch(() => {});
   };
+  if (loader) {
+    return <Loader></Loader>;
+  }
   return (
     <div className="side-nav-box  sticky-md-top  ">
       <div className="user-sm-box  text-center py-md-5 py-4 px-3 d-flex flex-column">

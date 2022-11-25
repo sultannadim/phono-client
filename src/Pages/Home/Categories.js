@@ -9,7 +9,9 @@ const Categories = () => {
   useEffect(() => {
     fetch("http://localhost:5000/categories")
       .then((res) => res.json())
-      .then((data) => setCategories(data));
+      .then((data) => {
+        setCategories(data);
+      });
   }, []);
 
   return (

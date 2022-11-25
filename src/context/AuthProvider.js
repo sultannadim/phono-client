@@ -70,6 +70,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     loader,
     myAdmin,
+    setLoader,
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../Shared/Spinner/Loader";
+import Seller from "../Shared/PrivateMessage/Seller";
 
 const SellerRoute = ({ children }) => {
   const { user, loader, myAdmin } = useContext(AuthContext);
@@ -11,11 +12,14 @@ const SellerRoute = ({ children }) => {
   if (loader) {
     return <Loader></Loader>;
   }
-  if (myAdmin?.role === "Seller") {
+  if (myAdmin?.role === "Seller" && user) {
     return children;
   }
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-  return <Navigate to="/dashboard" state={{ from: location }} replace />;
+  return <Seller></Seller>;
 };
 
 export default SellerRoute;

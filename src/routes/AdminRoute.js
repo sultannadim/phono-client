@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import Loader from "../Shared/Spinner/Loader";
+import Admin from "../Shared/PrivateMessage/Admin";
 
 const AdminRoute = ({ children }) => {
-  const { loader, myAdmin } = useContext(AuthContext);
+  const { user, loader, myAdmin } = useContext(AuthContext);
 
   let location = useLocation();
 
@@ -14,8 +15,10 @@ const AdminRoute = ({ children }) => {
   if (myAdmin?.role === "Admin") {
     return children;
   }
-
-  return <Navigate to="/dashboard" state={{ from: location }} replace />;
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return <Admin></Admin>;
 };
 
 export default AdminRoute;

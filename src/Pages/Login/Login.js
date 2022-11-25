@@ -5,9 +5,10 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-hot-toast";
+import Loader from "../../Shared/Spinner/Loader";
 
 const Login = () => {
-  const { loginUser, googleLogin } = useContext(AuthContext);
+  const { loginUser, googleLogin, loader } = useContext(AuthContext);
   const [error, setError] = useState("");
   let navigate = useNavigate();
   let location = useLocation();
@@ -46,6 +47,9 @@ const Login = () => {
         setError(error.message);
       });
   };
+  if (loader) {
+    return <Loader></Loader>;
+  }
   return (
     <section className="py-5 my-sm-5">
       <div className="container">

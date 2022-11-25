@@ -4,10 +4,14 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-hot-toast";
+import Loader from "../../Shared/Spinner/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, loader, setLoader, logOut } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigation = useNavigate();
   const handelRegistration = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -44,6 +48,9 @@ const Registration = () => {
             setError("");
             form.reset();
             toast.success("Registration Successfull");
+            logOut();
+            navigation("/login");
+            setLoader(false);
           })
           .catch((error) => {
             console.error(error);
@@ -56,6 +63,10 @@ const Registration = () => {
         setError(error.message);
       });
   };
+
+  if (loader) {
+    return <Loader></Loader>;
+  }
 
   return (
     <section className="py-5 my-sm-5">
