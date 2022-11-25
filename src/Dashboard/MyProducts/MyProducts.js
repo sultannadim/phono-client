@@ -81,7 +81,9 @@ const MyProducts = () => {
                       {product?.advertise}
                     </button>
                   ) : (
-                    product?.advertise
+                    <button className="btn btn-sm btn-primary advertise mb-lg-0 mb-2">
+                      {product?.advertise}
+                    </button>
                   )}
 
                   <button

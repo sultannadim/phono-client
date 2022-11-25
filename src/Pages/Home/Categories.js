@@ -13,7 +13,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="pt-5 pb-lg-5 mt-sm-5">
+    <section className="pt-5 pb-lg-5 ">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

@@ -68,7 +68,10 @@ const SideNav = () => {
 
           {roleUser?.role === "Admin" && (
             <>
-              <Link className=" fw-bold d-block text-decoration-none mb-2">
+              <Link
+                to="/dashboard/allsellers"
+                className=" fw-bold d-block text-decoration-none mb-2"
+              >
                 All Sellers
               </Link>
               <Link className=" fw-bold d-block text-decoration-none mb-2">
