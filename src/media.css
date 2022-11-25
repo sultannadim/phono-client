@@ -54,7 +54,9 @@
  }
 
 /*Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) and (max-width: 1199.98px) {  }
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .advertise{margin-bottom: 7px !important;}
+ }
 
 /*Extra large devices (Extra large desktops, 1200px and up)*/
 @media (min-width: 1200px) and (max-width: 1399.98px) {  }

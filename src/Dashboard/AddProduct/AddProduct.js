@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const handelAddProduct = (event) => {
     event.preventDefault();
@@ -21,6 +23,8 @@ const AddProduct = () => {
     const category = form.category.value;
     const details = form.details.value;
     const date = new Date().toLocaleString();
+    const status = "Unsold";
+    const advertise = "Advertise";
     let productId;
     if (category === "Samsung") {
       productId = 1;
@@ -47,6 +51,8 @@ const AddProduct = () => {
       details,
       productId,
       date,
+      status,
+      advertise,
     };
 
     fetch("http://localhost:5000/products", {
@@ -61,6 +67,7 @@ const AddProduct = () => {
         if (data.acknowledged) {
           toast.success("Product added successfully");
           form.reset();
+          navigate("/dashboard/myproducts");
         }
       });
   };

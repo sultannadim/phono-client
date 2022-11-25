@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import Table from "react-bootstrap/Table";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
+
   const sellerName = user?.displayName;
-  const { data: products = [] } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["sellerName"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/product/${sellerName}`);
@@ -14,7 +16,23 @@ const MyProducts = () => {
       return data;
     },
   });
-  console.log(products);
+  const handelDelete = (product) => {
+    const agree = window.confirm(
+      `Are you sure? you want to delet ${product?.productName}`
+    );
+    if (agree) {
+      fetch(`http://localhost:5000/product/${product?._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Your Product deleted");
+            refetch();
+          }
+        });
+    }
+  };
   return (
     <div>
       <h1 className="text-capitalize mb-sm-5 mb-3">
@@ -26,7 +44,8 @@ const MyProducts = () => {
             <tr>
               <th>SN</th>
               <th>Image</th>
-              <th>title</th>
+              <th>Title</th>
+              <th>Post Date</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -39,12 +58,21 @@ const MyProducts = () => {
                   <img src={product?.photoURL} alt="" />
                 </td>
                 <td>{product?.productName}</td>
-                <td>@mdo</td>
+                <td>{product?.date.split(",")[0]}</td>
+                <td>{product?.status}</td>
                 <td>
-                  <button className="btn btn-sm btn-primary mb-lg-0 mb-2">
-                    Advertise
-                  </button>
-                  <button className="btn btn-sm btn-danger ms-lg-2">
+                  {product?.advertise === "Advertise" ? (
+                    <button className="btn btn-sm btn-primary advertise mb-lg-0 mb-2">
+                      {product?.advertise}
+                    </button>
+                  ) : (
+                    product?.advertise
+                  )}
+
+                  <button
+                    onClick={() => handelDelete(product)}
+                    className="btn btn-sm btn-danger ms-lg-2"
+                  >
                     Delete
                   </button>
                 </td>
