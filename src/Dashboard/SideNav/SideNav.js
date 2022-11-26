@@ -44,7 +44,7 @@ const SideNav = () => {
           >
             My Profile
           </Link>
-          {(roleUser?.role === "User" || user?.emailVerified === true) && (
+          {user && (
             <Link
               to="/dashboard/myorders"
               className=" fw-bold d-block text-decoration-none mb-2"

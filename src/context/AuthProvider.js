@@ -57,7 +57,6 @@ const AuthProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setMyAdmin(data);
-        console.log(data);
       });
   }, [user?.email]);
 

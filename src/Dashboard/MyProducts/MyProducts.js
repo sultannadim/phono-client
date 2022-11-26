@@ -7,11 +7,11 @@ import toast from "react-hot-toast";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const sellerName = user?.displayName;
+  const email = user?.email;
   const { data: products = [], refetch } = useQuery({
-    queryKey: ["sellerName"],
+    queryKey: ["email"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/product/${sellerName}`);
+      const res = await fetch(`http://localhost:5000/product?email=${email}`);
       const data = await res.json();
       return data;
     },

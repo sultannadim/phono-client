@@ -7,7 +7,8 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const AddProduct = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, myAdmin } = useContext(AuthContext);
+
   const handelAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,6 +23,8 @@ const AddProduct = () => {
     const condation = form.condation.value;
     const category = form.category.value;
     const details = form.details.value;
+    const sellerStatus = myAdmin?.status;
+    const sellerEmail = user?.email;
     const date = new Date().toLocaleString();
     const status = "Unsold";
     const advertise = "Advertise";
@@ -53,6 +56,8 @@ const AddProduct = () => {
       date,
       status,
       advertise,
+      sellerStatus,
+      sellerEmail,
     };
 
     fetch("http://localhost:5000/products", {

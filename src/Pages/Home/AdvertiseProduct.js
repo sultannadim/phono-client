@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import verified from "../../images/verified.png";
 
 const AdvertiseProduct = () => {
   const { user } = useContext(AuthContext);
@@ -35,6 +37,13 @@ const AdvertiseProduct = () => {
                           </p>
                           <p className="mb-2">
                             <b>Seller : {product?.sellerName}</b>
+                            {product?.sellerStatus === "Verified" && (
+                              <img
+                                className="verified ms-2"
+                                src={verified}
+                                alt="profile"
+                              />
+                            )}
                           </p>
                           <p className="mb-2">Location : {product?.location}</p>
                           <p className="mb-2">
@@ -50,17 +59,27 @@ const AdvertiseProduct = () => {
                           </p>
                           <p className="mb-4">Post Date : {product?.date}</p>
 
-                          {user?.displayName === product?.sellerName ? (
-                            <p>
-                              <b>This is Your Product</b>
-                            </p>
+                          {user ? (
+                            <>
+                              {user?.displayName === product?.sellerName ? (
+                                <p>
+                                  <b>This is Your Product</b>
+                                </p>
+                              ) : (
+                                <Button
+                                  variant="primary"
+                                  className="bg-dark border-dark"
+                                >
+                                  Book Now
+                                </Button>
+                              )}
+                            </>
                           ) : (
-                            <Button
-                              variant="primary"
-                              className="bg-dark border-dark"
-                            >
-                              Book Now
-                            </Button>
+                            <Link to="/login">
+                              <button className="btn btn-dark border-dark">
+                                Please Login To Buy
+                              </button>
+                            </Link>
                           )}
                         </Card.Body>
                       </Card>
