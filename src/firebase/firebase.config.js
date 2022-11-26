@@ -5,13 +5,6 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  //   apiKey: "AIzaSyCfGNuTCn2e4-LvxqSrrYEsAFkXhZspOC0",
-  //   authDomain: "phono-de478.firebaseapp.com",
-  //   projectId: "phono-de478",
-  //   storageBucket: "phono-de478.appspot.com",
-  //   messagingSenderId: "277250283794",
-  //   appId: "1:277250283794:web:e4517de8e0e65655e33bcb",
-
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
   projectId: process.env.REACT_APP_projectId,
