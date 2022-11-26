@@ -10,7 +10,7 @@ import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
   useTitle("Log in");
-  const { loginUser, googleLogin, loader } = useContext(AuthContext);
+  const { loginUser, googleLogin, loader, user } = useContext(AuthContext);
   const [error, setError] = useState("");
   let navigate = useNavigate();
   let location = useLocation();
@@ -49,6 +49,9 @@ const Login = () => {
         setError(error.message);
       });
   };
+  if (user) {
+    navigate(from, { replace: true });
+  }
   if (loader) {
     return <Loader></Loader>;
   }

@@ -10,7 +10,7 @@ import useTitle from "../../Hooks/useTitle";
 
 const Registration = () => {
   useTitle("Registration");
-  const { createUser, updateUser, loader, setLoader, logOut } =
+  const { createUser, updateUser, loader, setLoader, logOut, user } =
     useContext(AuthContext);
   const [error, setError] = useState("");
   const navigation = useNavigate();
@@ -65,6 +65,10 @@ const Registration = () => {
         setError(error.message);
       });
   };
+
+  if (user) {
+    navigation("/");
+  }
 
   if (loader) {
     return <Loader></Loader>;
