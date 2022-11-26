@@ -59,7 +59,7 @@ const MyProducts = () => {
               <th>SN</th>
               <th>Image</th>
               <th>Title</th>
-              <th>Post Date</th>
+              <th>Price</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -72,20 +72,24 @@ const MyProducts = () => {
                   <img src={product?.photoURL} alt="" />
                 </td>
                 <td>{product?.productName}</td>
-                <td>{product?.date.split(",")[0]}</td>
+                <td>{product?.resellPrice} Tk</td>
                 <td>{product?.status}</td>
                 <td>
-                  {product?.advertise === "Advertise" ? (
-                    <button
-                      onClick={() => handelAdvertise(product?._id)}
-                      className="btn btn-sm btn-primary advertise mb-lg-0 mb-2"
-                    >
-                      {product?.advertise}
-                    </button>
-                  ) : (
-                    <button className="btn btn-sm btn-primary advertise mb-lg-0 mb-2">
-                      {product?.advertise}
-                    </button>
+                  {product?.status === "Unsold" && (
+                    <>
+                      {product?.advertise === "Advertise" ? (
+                        <button
+                          onClick={() => handelAdvertise(product?._id)}
+                          className="btn btn-sm btn-primary advertise mb-lg-0 mb-2"
+                        >
+                          {product?.advertise}
+                        </button>
+                      ) : (
+                        <button className="btn btn-sm btn-primary advertise mb-lg-0 mb-2">
+                          {product?.advertise}
+                        </button>
+                      )}
+                    </>
                   )}
 
                   <button
