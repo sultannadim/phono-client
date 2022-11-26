@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import verified from "../../images/verified.png";
+import AdvertiseCard from "./AdvertiseCard";
 
 const AdvertiseProduct = () => {
   const { user } = useContext(AuthContext);
@@ -26,7 +27,8 @@ const AdvertiseProduct = () => {
             {adProducts.map((product) => {
               return (
                 <>
-                  {product?.status === "Unsold" && (
+                  <AdvertiseCard product={product}></AdvertiseCard>
+                  {/* {product?.status === "Unsold" && (
                     <div className="col-lg-6" key={product?._id}>
                       <Card className="category-card mb-sm-4 mb-3">
                         <Card.Img variant="top" src={product?.photoURL} />
@@ -84,7 +86,7 @@ const AdvertiseProduct = () => {
                         </Card.Body>
                       </Card>
                     </div>
-                  )}
+                  )} */}
                 </>
               );
             })}

@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
-import verified from "../../images/verified.png";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import verified from "../../images/verified.png";
 import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
+import Modal from "react-bootstrap/Modal";
 
-const CategoryCard = ({ category }) => {
+const AdvertiseCard = ({ product }) => {
   const { user } = useContext(AuthContext);
-  const [report, setReport] = useState(false);
+
   // modal
   const [show, setShow] = useState(false);
 
@@ -19,15 +20,15 @@ const CategoryCard = ({ category }) => {
   const handelBooking = (event) => {
     event.preventDefault();
     const form = event.target;
-    const photoURL = category?.photoURL;
-    const productName = category?.productName;
-    const productId = category?._id;
+    const photoURL = product?.photoURL;
+    const productName = product?.productName;
+    const productId = product?._id;
     const name = user?.displayName;
     const email = user?.email;
-    const price = category?.resellPrice;
-    const phone = category?.phone;
-    const location = category?.location;
-    const sellerEmail = category?.sellerEmail;
+    const price = product?.resellPrice;
+    const phone = product?.phone;
+    const location = product?.location;
+    const sellerEmail = product?.sellerEmail;
 
     const orders = {
       productName,
@@ -56,14 +57,13 @@ const CategoryCard = ({ category }) => {
         }
       });
   };
-
   return (
     <>
-      {category?.status === "Unsold" && (
-        <div className="col-lg-6" key={category?._id}>
+      {product?.status === "Unsold" && (
+        <div className="col-lg-6" key={product?._id}>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>{category?.productName}</Modal.Title>
+              <Modal.Title>{product?.productName}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form onSubmit={handelBooking}>
@@ -92,7 +92,7 @@ const CategoryCard = ({ category }) => {
                     type="text"
                     disabled
                     name="price"
-                    defaultValue={category?.resellPrice}
+                    defaultValue={product?.resellPrice}
                   />
                 </Form.Group>
 
@@ -101,7 +101,7 @@ const CategoryCard = ({ category }) => {
                   <Form.Control
                     type="text"
                     name="phone"
-                    defaultValue={category?.phone}
+                    defaultValue={product?.phone}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -109,7 +109,7 @@ const CategoryCard = ({ category }) => {
                   <Form.Control
                     type="text"
                     name="location"
-                    defaultValue={category?.location}
+                    defaultValue={product?.location}
                   />
                 </Form.Group>
 
@@ -123,56 +123,52 @@ const CategoryCard = ({ category }) => {
               </Form>
             </Modal.Body>
           </Modal>
-
           <Card className="category-card mb-sm-4 mb-3">
-            <Card.Img variant="top" src={category?.photoURL} />
+            <Card.Img variant="top" src={product?.photoURL} />
             <Card.Body>
-              <Card.Title>{category?.productName}</Card.Title>
+              <Card.Title>{product?.productName}</Card.Title>
               <p className="mb-2">
-                <b>Category : {category?.category}</b>
+                <b>Category : {product?.category}</b>
               </p>
               <p className="mb-2">
-                <b>Seller : {category?.sellerName}</b>
-                {category?.sellerStatus === "Verified" && (
+                <b>Seller : {product?.sellerName}</b>
+                {product?.sellerStatus === "Verified" && (
                   <img className="verified ms-2" src={verified} alt="profile" />
                 )}
               </p>
-              <p className="mb-2">Location : {category?.location}</p>
+              <p className="mb-2">Location : {product?.location}</p>
               <p className="mb-2">
-                <span>Orginal Price : BDT-{category?.orginalPrice}</span>
+                <span>Orginal Price : BDT-{product?.orginalPrice}</span>
                 <span className="ms-3">
-                  Resell Price : BDT-{category?.resellPrice}
+                  Resell Price : BDT-{product?.resellPrice}
                 </span>
               </p>
-              <p className="mb-2">Purchase Year : {category?.yearPurchase}</p>
-              <p className="mb-4">Post Date : {category?.date}</p>
+              <p className="mb-2">Purchase Year : {product?.yearPurchase}</p>
+              <p className="mb-4">Post Date : {product?.date}</p>
 
-              <div className="d-flex justify-content-between">
-                {user?.displayName === category?.sellerName ? (
-                  <p>
-                    <b>This is Your Product</b>
-                  </p>
-                ) : (
-                  <Button
-                    onClick={() => handleShow(category)}
-                    variant="primary"
-                    className="bg-dark border-dark"
-                  >
-                    Book Now
-                  </Button>
-                )}
-                {user?.displayName === category?.sellerName ? (
-                  ""
-                ) : (
-                  <Button
-                    variant="primary"
-                    className="btn-sm py-0"
-                    disabled={report}
-                  >
-                    {report ? "Reported" : "Report Product"}
-                  </Button>
-                )}
-              </div>
+              {user ? (
+                <>
+                  {user?.displayName === product?.sellerName ? (
+                    <p>
+                      <b>This is Your Product</b>
+                    </p>
+                  ) : (
+                    <Button
+                      onClick={() => handleShow(product)}
+                      variant="primary"
+                      className="bg-dark border-dark"
+                    >
+                      Book Now
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <Link to="/login">
+                  <button className="btn btn-dark border-dark">
+                    Please Login To Buy
+                  </button>
+                </Link>
+              )}
             </Card.Body>
           </Card>
         </div>
@@ -181,4 +177,4 @@ const CategoryCard = ({ category }) => {
   );
 };
 
-export default CategoryCard;
+export default AdvertiseCard;

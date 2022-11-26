@@ -30,7 +30,10 @@ const Header = () => {
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-center my-nav pt-lg-0 pt-3">
-              <Link className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3">
+              <Link
+                to="/blog"
+                className=" fw-bold ms-3 text-decoration-none mb-lg-0 mb-3"
+              >
                 Blogs
               </Link>
 

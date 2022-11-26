@@ -7,6 +7,7 @@ import MyProducts from "../Dashboard/MyProducts/MyProducts";
 import UserProfile from "../Dashboard/UserProfile/UserProfile";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
+import Blogs from "../Pages/Blogs/Blogs";
 import CategoryProduct from "../Pages/CategoryProduct/CategoryProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/${params.id}`),
+      },
+      {
+        path: "blog",
+        element: <Blogs></Blogs>,
       },
     ],
   },
