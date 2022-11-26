@@ -6,8 +6,10 @@ import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-hot-toast";
 import Loader from "../../Shared/Spinner/Loader";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../Hooks/useTitle";
 
 const Registration = () => {
+  useTitle("Registration");
   const { createUser, updateUser, loader, setLoader, logOut } =
     useContext(AuthContext);
   const [error, setError] = useState("");

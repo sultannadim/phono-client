@@ -19,6 +19,9 @@
         font-size: 16px;
         font-weight: 500;
       }
+      .pay-form{
+        width: 100% !important;
+    }
     /* dasgboard part end */
  }
 
@@ -40,6 +43,9 @@
         min-height: inherit;
         
       }
+      .pay-form{
+        width: 80% !important;
+    }
     /* dasgboard part end */
  }
 
@@ -49,6 +55,9 @@
     .banner-content h1{
         font-size: 70px;
         line-height: 80px;
+    }
+    .pay-form{
+        width: 100% !important;
     }
     /* banner part end */
  }

@@ -9,10 +9,10 @@ import toast from "react-hot-toast";
 
 const CategoryCard = ({ category }) => {
   const { user } = useContext(AuthContext);
-  const [report, setReport] = useState(false);
+
   // modal
   const [show, setShow] = useState(false);
-
+  const [report, setReport] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (category) => setShow(true);
 
@@ -28,6 +28,7 @@ const CategoryCard = ({ category }) => {
     const phone = category?.phone;
     const location = category?.location;
     const sellerEmail = category?.sellerEmail;
+    const paymentStatus = "Pay";
 
     const orders = {
       productName,
@@ -39,6 +40,7 @@ const CategoryCard = ({ category }) => {
       phone,
       location,
       sellerEmail,
+      paymentStatus,
     };
     fetch("http://localhost:5000/orders", {
       method: "POST",
@@ -53,6 +55,26 @@ const CategoryCard = ({ category }) => {
           form.reset();
           setShow(false);
           toast.success("Booking Complete");
+        }
+      });
+  };
+
+  const handelReport = (id) => {
+    const reportStatus = "Reported";
+    const reportedProductId = id;
+    const report = { reportStatus, reportedProductId };
+    fetch("http://localhost:5000/reports", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(report),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Your report submited to admin");
+          setReport(true);
         }
       });
   };
@@ -165,11 +187,14 @@ const CategoryCard = ({ category }) => {
                   ""
                 ) : (
                   <Button
+                    onClick={() => handelReport(category?._id)}
                     variant="primary"
                     className="btn-sm py-0"
-                    disabled={report}
+                    disabled={category?.reportStatus || report}
                   >
-                    {report ? "Reported" : "Report Product"}
+                    {category?.reportStatus || report
+                      ? "Reported"
+                      : "Report Product"}
                   </Button>
                 )}
               </div>

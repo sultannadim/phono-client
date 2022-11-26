@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import Table from "react-bootstrap/Table";
-
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useTitle from "../../Hooks/useTitle";
 
 const MyOrders = () => {
+  useTitle("My Orders");
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const email = user?.email;
@@ -28,6 +30,10 @@ const MyOrders = () => {
         .then((data) => {
           if (data.deletedCount > 0) {
             toast.success("Order deleted");
+            const newOrders = orders.filter(
+              (myOrder) => myOrder?._id !== order?._id
+            );
+            setOrders(newOrders);
           }
         });
     }
@@ -61,9 +67,18 @@ const MyOrders = () => {
                 <td>{order?.price} TK.</td>
 
                 <td>
-                  <button className="btn btn-sm btn-primary ms-lg-2">
-                    Pay Now
-                  </button>
+                  {order?.paymentStatus === "Pay" ? (
+                    <Link to={`/dashboard/checkout/${order?._id}`}>
+                      <button className="btn btn-sm btn-danger ms-lg-2">
+                        Pay Now
+                      </button>
+                    </Link>
+                  ) : (
+                    <button className="btn btn-sm btn-primary ms-lg-2">
+                      Paid
+                    </button>
+                  )}
+
                   <button
                     onClick={() => handelDelete(order)}
                     className="btn btn-sm btn-danger ms-lg-2"

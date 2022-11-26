@@ -4,8 +4,10 @@ import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const AddProduct = () => {
+  useTitle("Add A Product");
   const navigate = useNavigate();
   const { user, myAdmin } = useContext(AuthContext);
 

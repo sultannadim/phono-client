@@ -84,7 +84,10 @@ const SideNav = () => {
               >
                 All Buyers
               </Link>
-              <Link className=" fw-bold d-block text-decoration-none mb-2">
+              <Link
+                to="/dashboard/reportedproduct"
+                className=" fw-bold d-block text-decoration-none mb-2"
+              >
                 Reported Items
               </Link>
             </>

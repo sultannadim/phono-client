@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
+import verified from "../../images/verified.png";
 
 const UserProfile = () => {
+  useTitle("User Profile");
   const { user } = useContext(AuthContext);
   const [roleUser, setRoleUser] = useState({});
 
@@ -28,7 +31,12 @@ const UserProfile = () => {
           </div>
 
           <div className="ms-sm-4 ms-2 profile-details">
-            <h4 className="text-capitalize mb-2">Name : {user?.displayName}</h4>
+            <h4 className="text-capitalize mb-2">
+              Name : {user?.displayName}
+              {roleUser?.status === "Verified" && (
+                <img className="verified ms-2" src={verified} alt="profile" />
+              )}
+            </h4>
             <h5 className=" mb-2">Email : {user?.email}</h5>
             <h5 className="m-0">Role : {roleUser?.role && roleUser?.role}</h5>
           </div>

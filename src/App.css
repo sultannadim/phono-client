@@ -63,10 +63,10 @@
 /* category card part end */
 
 /* my product part start */
-.table-box img{
+.table-box img,.pay-img{
   width: 100px;
   height: 60px;
-  object-fit: cover;
+  
   border-radius: 3px;
 }
 .table-box{

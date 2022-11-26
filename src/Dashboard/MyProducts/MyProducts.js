@@ -3,8 +3,10 @@ import { AuthContext } from "../../context/AuthProvider";
 import Table from "react-bootstrap/Table";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useTitle from "../../Hooks/useTitle";
 
 const MyProducts = () => {
+  useTitle("My Products");
   const { user } = useContext(AuthContext);
 
   const email = user?.email;

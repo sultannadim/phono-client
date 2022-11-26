@@ -29,6 +29,7 @@ const AdvertiseCard = ({ product }) => {
     const phone = product?.phone;
     const location = product?.location;
     const sellerEmail = product?.sellerEmail;
+    const paymentStatus = "Pay";
 
     const orders = {
       productName,
@@ -40,6 +41,7 @@ const AdvertiseCard = ({ product }) => {
       phone,
       location,
       sellerEmail,
+      paymentStatus,
     };
     fetch("http://localhost:5000/orders", {
       method: "POST",

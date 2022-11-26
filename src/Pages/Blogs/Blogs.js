@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../../Hooks/useTitle";
 
 const Blogs = () => {
+  useTitle("Blogs");
   return (
     <section className="py-sm-5 py-4">
       <div className="container">

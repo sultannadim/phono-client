@@ -6,8 +6,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { toast } from "react-hot-toast";
 import Loader from "../../Shared/Spinner/Loader";
+import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
+  useTitle("Log in");
   const { loginUser, googleLogin, loader } = useContext(AuthContext);
   const [error, setError] = useState("");
   let navigate = useNavigate();
