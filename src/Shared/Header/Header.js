@@ -14,6 +14,7 @@ const Header = () => {
     logOut()
       .then(() => {
         toast.error("You Are Loged Out");
+        localStorage.removeItem("phono-token");
       })
       .catch(() => {});
   };

@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 import AdvertiseCard from "./AdvertiseCard";
 
 const AdvertiseProduct = () => {
   const [adProducts, sedAddProducts] = useState([]);
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
-    fetch("http://localhost:5000/advertise")
+    fetch("http://localhost:5000/advertise", {
+      headers: {
+        autorization: `Bearear ${localStorage.getItem("phono-token")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => sedAddProducts(data));
+      .then((data) => {
+        sedAddProducts(data);
+      });
   }, []);
 
-  if (adProducts?.length) {
+  if (adProducts?.length && user) {
     return (
       <section className="pt-5 my-sm-5">
         <div className="container">
@@ -21,9 +30,10 @@ const AdvertiseProduct = () => {
 
             {adProducts.map((product) => {
               return (
-                <>
-                  <AdvertiseCard product={product}></AdvertiseCard>
-                </>
+                <AdvertiseCard
+                  key={product?._id}
+                  product={product}
+                ></AdvertiseCard>
               );
             })}
           </div>

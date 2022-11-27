@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    setLoader(true);
     return signOut(auth);
   };
 
@@ -47,6 +48,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoader(false);
+
       setUser(currentUser);
     });
     return () => unsubscribe();

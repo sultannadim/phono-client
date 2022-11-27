@@ -1,22 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
+
 import useTitle from "../../Hooks/useTitle";
 
 const MyOrders = () => {
   useTitle("My Orders");
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const navigation = useNavigate();
   const email = user?.email;
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/orders?email=${email}`).then((res) => {
-      setOrders(res.data);
-    });
-  }, [email]);
+    fetch(`http://localhost:5000/orders?email=${email}`, {
+      headers: {
+        autorization: `Bearear ${localStorage.getItem("phono-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem("phono-token");
+          toast.error(`something wrong. error ${res.status}`);
+          navigation("/");
+          return logOut();
+        }
+        return res.json();
+      })
+      .then((data) => setOrders(data));
+  }, [email, logOut, navigation]);
 
   const handelDelete = (order) => {
     const agree = window.confirm(

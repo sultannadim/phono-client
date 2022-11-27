@@ -62,7 +62,7 @@ const AdvertiseCard = ({ product }) => {
   return (
     <>
       {product?.status === "Unsold" && (
-        <div className="col-lg-6" key={product?._id}>
+        <div className="col-lg-6">
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>{product?.productName}</Modal.Title>

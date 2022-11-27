@@ -50,8 +50,9 @@ const Registration = () => {
             setError("");
             form.reset();
             toast.success("Registration Successfull");
-            logOut();
+
             navigation("/login");
+            logOut();
             setLoader(false);
           })
           .catch((error) => {

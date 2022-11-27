@@ -18,9 +18,10 @@ const CategoryProduct = () => {
 
           {categories.map((category) => {
             return (
-              <>
-                <CategoryCard category={category}></CategoryCard>
-              </>
+              <CategoryCard
+                key={category?._id}
+                category={category}
+              ></CategoryCard>
             );
           })}
         </div>

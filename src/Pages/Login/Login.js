@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState("");
   let navigate = useNavigate();
   let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || "/dashboard";
   const handelLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -27,6 +27,23 @@ const Login = () => {
         setError("");
         toast.success("Log in Successfull");
         form.reset();
+
+        // jwt token start
+        const currentUser = { email: user.email };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("phono-token", data.token);
+          });
+        // jwt token end
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -42,6 +59,23 @@ const Login = () => {
 
         setError("");
         toast.success("Google Login successfull");
+
+        // jwt token start
+        const currentUser = { email: user.email };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("phono-token", data.token);
+          });
+        // jwt token end
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -49,12 +83,15 @@ const Login = () => {
         setError(error.message);
       });
   };
-  if (user) {
-    navigate(from, { replace: true });
-  }
+
   if (loader) {
     return <Loader></Loader>;
   }
+
+  if (user) {
+    navigate("/");
+  }
+
   return (
     <section className="py-5 my-sm-5">
       <div className="container">

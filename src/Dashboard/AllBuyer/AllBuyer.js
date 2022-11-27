@@ -1,21 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { useQuery } from "@tanstack/react-query";
+
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
+import { useNavigate } from "react-router-dom";
 
 const AllBuyer = () => {
   useTitle("All Buyers");
-  const { user } = useContext(AuthContext);
-  const { data: buyers = [], refetch } = useQuery({
-    queryKey: ["allbuyers"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allbuyers");
-      const data = await res.json();
-      return data;
-    },
-  });
+  const [buyers, setBuyers] = useState([]);
+  const navigation = useNavigate();
+  const { user, logOut } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/allbuyers", {
+      headers: {
+        autorization: `Bearear ${localStorage.getItem("phono-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem("phono-token");
+          toast.error(`something wrong. error ${res.status}`);
+          navigation("/");
+          return logOut();
+        }
+        return res.json();
+      })
+      .then((data) => setBuyers(data));
+  }, [logOut, navigation]);
 
   const handelDelete = (buyer) => {
     const agree = window.confirm(
@@ -29,7 +42,10 @@ const AllBuyer = () => {
         .then((data) => {
           if (data.deletedCount > 0) {
             toast.success("Your Buyer deleted");
-            refetch();
+            const newBuyers = buyers.filter(
+              (nBuyer) => nBuyer?._id !== buyer?._id
+            );
+            setBuyers(newBuyers);
           }
         });
     }
