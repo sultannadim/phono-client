@@ -13,7 +13,9 @@ const MyProducts = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ["email"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/product?email=${email}`);
+      const res = await fetch(
+        `https://phono-server-flame.vercel.app/product?email=${email}`
+      );
       const data = await res.json();
       return data;
     },
@@ -23,7 +25,7 @@ const MyProducts = () => {
       `Are you sure? you want to delet ${product?.productName}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/product/${product?._id}`, {
+      fetch(`https://phono-server-flame.vercel.app/product/${product?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -36,7 +38,7 @@ const MyProducts = () => {
     }
   };
   const handelAdvertise = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://phono-server-flame.vercel.app/product/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

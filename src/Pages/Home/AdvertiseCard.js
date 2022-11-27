@@ -43,7 +43,7 @@ const AdvertiseCard = ({ product }) => {
       sellerEmail,
       paymentStatus,
     };
-    fetch("http://localhost:5000/orders", {
+    fetch("https://phono-server-flame.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

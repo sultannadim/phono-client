@@ -9,7 +9,7 @@ const ReportedProduct = () => {
   const { data: reports = [], refetch } = useQuery({
     queryKey: ["reported"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reported");
+      const res = await fetch("https://phono-server-flame.vercel.app/reported");
       const data = await res.json();
       return data;
     },
@@ -20,7 +20,7 @@ const ReportedProduct = () => {
       `Are you sure? you want to delet ${report?.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/product/${report?._id}`, {
+      fetch(`https://phono-server-flame.vercel.app/product/${report?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

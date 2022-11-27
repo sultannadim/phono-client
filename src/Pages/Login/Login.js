@@ -10,7 +10,7 @@ import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
   useTitle("Log in");
-  const { loginUser, googleLogin, loader, user } = useContext(AuthContext);
+  const { loginUser, googleLogin, loader } = useContext(AuthContext);
   const [error, setError] = useState("");
   let navigate = useNavigate();
   let location = useLocation();
@@ -30,7 +30,7 @@ const Login = () => {
 
         // jwt token start
         const currentUser = { email: user.email };
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://phono-server-flame.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -62,7 +62,7 @@ const Login = () => {
 
         // jwt token start
         const currentUser = { email: user.email };
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://phono-server-flame.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -86,10 +86,6 @@ const Login = () => {
 
   if (loader) {
     return <Loader></Loader>;
-  }
-
-  if (user) {
-    navigate("/");
   }
 
   return (

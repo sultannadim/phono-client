@@ -13,7 +13,7 @@ const AllBuyer = () => {
   const { user, logOut } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allbuyers", {
+    fetch("https://phono-server-flame.vercel.app/allbuyers", {
       headers: {
         autorization: `Bearear ${localStorage.getItem("phono-token")}`,
       },
@@ -35,7 +35,7 @@ const AllBuyer = () => {
       `Are you sure? you want to delet ${buyer?.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/allbuyers/${buyer?._id}`, {
+      fetch(`https://phono-server-flame.vercel.app/allbuyers/${buyer?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

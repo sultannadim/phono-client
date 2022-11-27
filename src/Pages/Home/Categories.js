@@ -8,9 +8,11 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/categories`).then((res) => {
-      setCategories(res.data);
-    });
+    axios
+      .get(`https://phono-server-flame.vercel.app/categories`)
+      .then((res) => {
+        setCategories(res.data);
+      });
   }, []);
 
   return (

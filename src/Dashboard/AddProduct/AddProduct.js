@@ -62,7 +62,7 @@ const AddProduct = () => {
       sellerEmail,
     };
 
-    fetch("http://localhost:5000/products", {
+    fetch("https://phono-server-flame.vercel.app/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",

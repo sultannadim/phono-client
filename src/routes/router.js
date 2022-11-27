@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+          fetch(`https://phono-server-flame.vercel.app/category/${params.id}`),
       },
       {
         path: "blog",
@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/orders/${params.id}`),
+          fetch(`https://phono-server-flame.vercel.app/orders/${params.id}`),
       },
       {
         path: "/dashboard/reportedproduct",

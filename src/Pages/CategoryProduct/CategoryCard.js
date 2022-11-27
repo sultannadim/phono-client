@@ -42,7 +42,7 @@ const CategoryCard = ({ category }) => {
       sellerEmail,
       paymentStatus,
     };
-    fetch("http://localhost:5000/orders", {
+    fetch("https://phono-server-flame.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -63,7 +63,7 @@ const CategoryCard = ({ category }) => {
     const reportStatus = "Reported";
     const reportedProductId = id;
     const report = { reportStatus, reportedProductId };
-    fetch("http://localhost:5000/reports", {
+    fetch("https://phono-server-flame.vercel.app/reports", {
       method: "POST",
       headers: {
         "content-type": "application/json",

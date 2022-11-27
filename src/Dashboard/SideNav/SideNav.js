@@ -11,7 +11,7 @@ const SideNav = () => {
   const [roleUser, setRoleUser] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/roleuser?email=${user?.email}`)
+    fetch(`https://phono-server-flame.vercel.app/roleuser?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setRoleUser(data);

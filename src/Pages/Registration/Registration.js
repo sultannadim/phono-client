@@ -37,7 +37,7 @@ const Registration = () => {
         const profiel = { displayName: name, photoURL: photoURL };
         updateUser(profiel)
           .then(() => {
-            fetch("http://localhost:5000/users", {
+            fetch("https://phono-server-flame.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

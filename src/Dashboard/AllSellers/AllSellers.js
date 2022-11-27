@@ -13,14 +13,16 @@ const AllSellers = () => {
   const { data: sellers = [], refetch } = useQuery({
     queryKey: ["allsellers"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allsellers");
+      const res = await fetch(
+        "https://phono-server-flame.vercel.app/allsellers"
+      );
       const data = await res.json();
       return data;
     },
   });
 
   const handelVerified = (seller) => {
-    fetch(`http://localhost:5000/allsellers/${seller?._id}`, {
+    fetch(`https://phono-server-flame.vercel.app/allsellers/${seller?._id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -37,7 +39,7 @@ const AllSellers = () => {
       `Are you sure? you want to delet ${seller?.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/allsellers/${seller?._id}`, {
+      fetch(`https://phono-server-flame.vercel.app/allsellers/${seller?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -96,7 +98,7 @@ const AllSellers = () => {
                   {seller?.status !== "Verified" && (
                     <button
                       onClick={() => handelVerified(seller)}
-                      className="btn btn-sm btn-danger ms-lg-2"
+                      className="btn btn-sm btn-danger mb-lg-0 mb-2 ms-lg-2"
                     >
                       Verify User
                     </button>

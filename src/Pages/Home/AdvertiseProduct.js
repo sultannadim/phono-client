@@ -8,7 +8,7 @@ const AdvertiseProduct = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/advertise", {
+    fetch("https://phono-server-flame.vercel.app/advertise", {
       headers: {
         autorization: `Bearear ${localStorage.getItem("phono-token")}`,
       },

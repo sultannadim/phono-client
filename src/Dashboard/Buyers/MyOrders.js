@@ -14,7 +14,7 @@ const MyOrders = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${email}`, {
+    fetch(`https://phono-server-flame.vercel.app/orders?email=${email}`, {
       headers: {
         autorization: `Bearear ${localStorage.getItem("phono-token")}`,
       },
@@ -36,7 +36,7 @@ const MyOrders = () => {
       `Are you sure? you want to delet ${order?.productName}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/orders/${order?._id}`, {
+      fetch(`https://phono-server-flame.vercel.app/orders/${order?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -82,12 +82,12 @@ const MyOrders = () => {
                 <td>
                   {order?.paymentStatus === "Pay" ? (
                     <Link to={`/dashboard/checkout/${order?._id}`}>
-                      <button className="btn btn-sm btn-danger ms-lg-2">
+                      <button className="btn btn-sm btn-danger mb-lg-0 mb-2 ms-lg-2">
                         Pay Now
                       </button>
                     </Link>
                   ) : (
-                    <button className="btn btn-sm btn-primary ms-lg-2">
+                    <button className="btn btn-sm btn-primary mb-lg-0 mb-2 ms-lg-2">
                       Paid
                     </button>
                   )}
