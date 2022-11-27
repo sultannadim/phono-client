@@ -75,7 +75,7 @@ const Login = () => {
             localStorage.setItem("phono-token", data.token);
           });
         // jwt token end
-        navigate(from, { replace: true });
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
